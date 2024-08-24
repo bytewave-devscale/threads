@@ -1,0 +1,36 @@
+@host = http://localhost:8030
+
+### get
+GET {{host}}/
+
+
+### create a post
+POST {{host}}/api/v1/post/ 
+Content-Type: application/json
+
+{
+    "authorId":"id1",
+    "title":"123",
+    "content": ""
+}
+
+
+### get all post
+GET {{host}}/api/v1/post/all/
+
+
+### get one post
+GET {{host}}/api/v1/post/66c9fa48953779f9ba328555
+
+
+### update post
+PATCH {{host}}/api/v1/post/66c9fa5f953779f9ba328557
+Content-Type: application/json
+
+{
+    "authorId":"afg",
+    "title": "his"
+}
+
+### delete post
+DELETE {{host}}/api/v1/post/66c9fa61953779f9ba328559
