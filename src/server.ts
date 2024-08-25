@@ -1,7 +1,7 @@
 import express from "express";
 import dotenv from "dotenv";
 import connectDb from "./utils/connectDb";
-import postRouter from "./routes/post.router";
+import threadRouter from "./routes/thread.route";
 
 dotenv.config();
 
@@ -10,9 +10,9 @@ const app = express();
 app.use(express.json());
 
 app.get("/", (_, res) => {
-  res.status(200).send("post services - bytewaveForum");
+  res.status(200).send("thread services - bytewaveForum");
 });
-app.use("/api/v1/post", postRouter);
+app.use("/api/v1/thread", threadRouter);
 
 connectDb();
 
