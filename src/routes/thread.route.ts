@@ -1,6 +1,6 @@
 import { Router } from "express";
 import * as threadController from "../controllers/thread.controller";
-import { authMiddleware } from "../../middlewares/auth.middleware";
+import { authMiddleware } from "../middlewares/auth.middleware";
 
 const threadRouter = Router();
 

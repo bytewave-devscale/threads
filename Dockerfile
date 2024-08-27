@@ -1,7 +1,7 @@
 # stage 1: build
 FROM node:22 AS build
 
-WORKDIR /apps/auths
+WORKDIR /apps/threads
 
 COPY package*.json ./
 
@@ -14,9 +14,9 @@ RUN npm run build
 
 FROM node:22.6.0-alpine3.19
 
-WORKDIR /apps/auths
+WORKDIR /apps/threads
 
-COPY --from=build /apps/auths/dist ./
+COPY --from=build /apps/threads/dist ./
 
 COPY ./.env ./.env
 
