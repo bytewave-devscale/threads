@@ -15,7 +15,7 @@ export async function createThread(threadData: threadInterface) {
 }
 
 export async function getOneThread(threadId: string) {
-  const thread = await Thread.findById(threadId);
+  const thread = await Thread.find({_id:threadId});
   return thread;
 }
 
