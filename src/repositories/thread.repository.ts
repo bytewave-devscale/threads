@@ -29,7 +29,7 @@ export async function updateThread(
   threadData: threadUpdateInterface
 ) {
   const updatedThread = await Thread.findOneAndUpdate(
-    { _id: threadId },
+    { _id: threadId, authorId: threadData.authData.userId },
     threadData,
     {
       new: true,
@@ -38,7 +38,7 @@ export async function updateThread(
   return updatedThread;
 }
 
-export async function deleteThread(threadId: string) {
-  const deletedThread = await Thread.findByIdAndDelete(threadId);
+export async function deleteThread(threadId: string, userId:string) {
+  const deletedThread = await Thread.findOneAndDelete({_id:threadId, authorId:userId})
   return deletedThread;
 }

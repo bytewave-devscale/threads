@@ -59,17 +59,20 @@ export async function handleUpdateThread(req: Request, res: Response) {
         message: "update thread failed",
         error: error.issues[0].message,
       });
-    } else {
-      res.status(500).json({ message: "update thread failed", error });
+    } else if (error instanceof Error) {
+      res
+        .status(500)
+        .json({ message: "update thread failed", error: error.message });
     }
   }
 }
 
 export async function handleDeleteThread(req: Request, res: Response) {
   const threadId = req.params.threadId;
+  const userId = req.body.authData.userId;
 
   try {
-    const deletedThread = await threadService.deleteThread(threadId);
+    const deletedThread = await threadService.deleteThread(threadId, userId);
     res
       .status(201)
       .json({ message: "thread deleted successfully", thread: deletedThread });

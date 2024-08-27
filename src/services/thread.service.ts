@@ -1,4 +1,7 @@
-import { threadInterface, threadUpdateInterface } from "../types/thread.type";
+import {
+  threadCreateInterface,
+  threadUpdateInterface,
+} from "../types/thread.type";
 import { z, ZodError } from "zod";
 import * as threadRepository from "../repositories/thread.repository";
 
@@ -13,9 +16,11 @@ const threadUpdateSchema = z
     title: z.string().min(3).optional(),
     content: z.string().min(3).optional(),
   })
-  .strict();
+  .strip();
 
-export async function createThread(data: threadInterface) {
+export async function createThread(data: threadCreateInterface) {
+  // replace the author id from json with userId from auth
+  data.authorId = data.authData.userId;
   // validate input using zod
   threadSchema.parse(data);
 
@@ -42,12 +47,18 @@ export async function updateThread(
   // validate input
   threadUpdateSchema.parse(threadData);
 
-  const updatedThread = await threadRepository.updateThread(threadId, threadData);
+  const updatedThread = await threadRepository.updateThread(
+    threadId,
+    threadData
+  );
+
+  if (!updatedThread) throw new Error("your thread not found");
+
   return updatedThread;
 }
 
-export async function deleteThread(threadId: string) {
-  const deletedThread = await threadRepository.deleteThread(threadId);
-  if (!deletedThread) throw new Error("thread not found");
+export async function deleteThread(threadId: string, userId: string) {
+  const deletedThread = await threadRepository.deleteThread(threadId, userId);
+  if (!deletedThread) throw new Error("your thread not found");
   return deletedThread;
 }
