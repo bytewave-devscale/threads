@@ -13,8 +13,9 @@ Content-Type: application/json
 GET {{host}}/
 
 
+
 ### create a post
-POST {{host}}/api/v1/thread/ 
+POST http://103.82.92.117:8020
 Content-Type: application/json
 
 {
