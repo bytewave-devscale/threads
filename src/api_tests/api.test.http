@@ -9,54 +9,9 @@ Content-Type: application/json
     "password":"rahasia123"
 }
 
-### get
-GET {{host}}/
+### get all threads
+GET {{host}}/api/v1/thread
 
 
-
-### create a post
-POST http://103.82.92.117:8020
-Content-Type: application/json
-
-{
-    "authorId":"id1",
-    "title":"123",
-    "content": "content thread",
-    "tokens":{
-        "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmJkYWUzNTkxNjkyZTEwYmE1MDQyMjEiLCJpYXQiOjE3MjQ3MjYyNzUsImV4cCI6MTcyNDcyNzE3NX0.O1O9LMxFZBmoW9jOMAihnfK5A_xmMstf1N39KuHIdds",
-  "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmJkYWUzNTkxNjkyZTEwYmE1MDQyMjEiLCJpYXQiOjE3MjQ3MjYyNzUsImV4cCI6MTcyNTMzMTA3NX0.vmVZtPO1p9Pd6AyaXtJV-4Dzns2HCOnhgKDP10Thbvc"
-    }
-}
-
-
-### get all post
-GET {{host}}/api/v1/thread/all/
-
-
-### get one post
-GET {{host}}/api/v1/post/66c9fa48953779f9ba328555
-
-
-### update post
-PATCH {{host}}/api/v1/thread/66ad65bdacf5a44b753d8c97
-Content-Type: application/json
-
-{
-    "content":"new content lho",
-    "title": "his",
-    "tokens":{
-        "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmJkYWUzNTkxNjkyZTEwYmE1MDQyMjEiLCJpYXQiOjE3MjQ3MjYyNzUsImV4cCI6MTcyNDcyNzE3NX0.O1O9LMxFZBmoW9jOMAihnfK5A_xmMstf1N39KuHIdds",
-  "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmJkYWUzNTkxNjkyZTEwYmE1MDQyMjEiLCJpYXQiOjE3MjQ3MjYyNzUsImV4cCI6MTcyNTMzMTA3NX0.vmVZtPO1p9Pd6AyaXtJV-4Dzns2HCOnhgKDP10Thbvc"
-    }
-}
-
-### delete post
-DELETE {{host}}/api/v1/thread/66cd3ebddafa564683bc5a9e
-Content-Type: application/json
-
-{
-    "tokens":{
-        "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmJkYWUzNTkxNjkyZTEwYmE1MDQyMjEiLCJpYXQiOjE3MjQ3MjYyNzUsImV4cCI6MTcyNDcyNzE3NX0.O1O9LMxFZBmoW9jOMAihnfK5A_xmMstf1N39KuHIdds",
-        "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmJkYWUzNTkxNjkyZTEwYmE1MDQyMjEiLCJpYXQiOjE3MjQ3MjYyNzUsImV4cCI6MTcyNTMzMTA3NX0.vmVZtPO1p9Pd6AyaXtJV-4Dzns2HCOnhgKDP10Thbvc"
-    }
-}
+### get thread by id
+GET {{host}}/api/v1/thread/66ad7280b5b3adbb4ea0d154
