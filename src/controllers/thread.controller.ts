@@ -3,22 +3,28 @@ import * as threadService from "../services/thread.service";
 import { ZodError } from "zod";
 
 export async function handleCreateThread(req: Request, res: Response) {
+  const { title, content, authData } = req.body;
+  const threadData = {
+    authorId: authData.userId,
+    title,
+    content,
+  };
+
   try {
-    const newThread = await threadService.createThread(req.body);
-    res.status(201).json({
-      message: "thread created succesfully",
-      thread: newThread,
-    });
+    const newThread = await threadService.createThread(threadData);
+    res.status(201).json({ newThread, authData: req.body.authData });
   } catch (error) {
     if (error instanceof ZodError) {
-      res.status(400).json({
-        message: "create thread failed",
+      return res.status(400).json({
         error: error.issues[0].message,
+        authData: req.body.authData,
       });
-    } else {
-      res.status(500).json({
-        message: "update thread failed",
-        error,
+    }
+
+    if (error instanceof Error) {
+      return res.status(500).json({
+        error: error.message,
+        authData: req.body.authData,
       });
     }
   }
@@ -61,38 +67,45 @@ export async function handleGetAllThread(req: Request, res: Response) {
 
 export async function handleUpdateThread(req: Request, res: Response) {
   const threadId = req.params.threadId;
+  const authorId = req.body.authData.userId;
+
+  const updateData = { ...req.body };
+  delete updateData.authData;
 
   try {
-    const updatedThread = await threadService.updateThread(threadId, req.body);
-    res.status(201).json({ thread: updatedThread });
+    const updatedThread = await threadService.updateThread(
+      threadId,
+      authorId,
+      updateData
+    );
+    res
+      .status(201)
+      .json({ thread: updatedThread, authData: req.body.authData });
   } catch (error) {
     if (error instanceof ZodError) {
       res.status(400).json({
-        message: "update thread failed",
         error: error.issues[0].message,
       });
     } else if (error instanceof Error) {
       res
         .status(500)
-        .json({ message: "update thread failed", error: error.message });
+        .json({ error: error.message, authData: req.body.authData });
     }
   }
 }
 
 export async function handleDeleteThread(req: Request, res: Response) {
-  const threadId = req.params.threadId;
-  const userId = req.body.authData.userId;
+  const _id = req.params.threadId;
+  const authorId = req.body.authData.userId;
 
   try {
-    const deletedThread = await threadService.deleteThread(threadId, userId);
-    res
-      .status(201)
-      .json({ message: "thread deleted successfully", thread: deletedThread });
+    const deletedThread = await threadService.deleteThread({ _id, authorId });
+    res.status(201).json({ deletedThread, authData: req.body.authData });
   } catch (error) {
     if (error instanceof Error) {
       res
         .status(400)
-        .json({ message: "delete thread failed", error: error.message });
+        .json({ error: error.message, authData: req.body.authData });
     }
   }
 }

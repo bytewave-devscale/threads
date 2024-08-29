@@ -11,8 +11,6 @@ export interface threadCreateInterface {
 }
 
 export interface threadUpdateInterface {
-  authorId?: string;
   title?: string;
   content?: string;
-  authData: { userId: string; accessToken?: string };
 }

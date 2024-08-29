@@ -29,13 +29,16 @@ export async function getThreads(filter: { _id?: string; authorId?: string }) {
   return threads;
 }
 
-export async function updateThread(
-  threadId: string,
-  threadData: threadUpdateInterface
-) {
+export async function updateThread(data: {
+  _id: string;
+  authorId: string;
+  updateData: threadUpdateInterface;
+}) {
+  const { _id, authorId, updateData } = data;
+
   const updatedThread = await threadModel.findOneAndUpdate(
-    { _id: threadId, authorId: threadData.authData.userId },
-    threadData,
+    { _id, authorId },
+    updateData,
     {
       new: true,
     }
@@ -43,10 +46,11 @@ export async function updateThread(
   return updatedThread;
 }
 
-export async function deleteThread(threadId: string, userId: string) {
+export async function deleteThread(data: { _id: string; authorId: string }) {
+  const { _id, authorId } = data;
   const deletedThread = await threadModel.findOneAndDelete({
-    _id: threadId,
-    authorId: userId,
+    _id,
+    authorId,
   });
   return deletedThread;
 }

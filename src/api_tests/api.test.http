@@ -15,3 +15,43 @@ GET {{host}}/api/v1/thread
 
 ### get thread by id
 GET {{host}}/api/v1/thread/66ad7280b5b3adbb4ea0d154
+
+
+### create thread
+POST {{host}}/api/v1/thread
+Content-Type: application/json
+
+{
+    "title": "my other awesome thread",
+    "content": "this is the content of my awesome thread",
+    "tokens": {
+        "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmJkYWUzNTkxNjkyZTEwYmE1MDQyMjEiLCJpYXQiOjE3MjQ4OTY0MTUsImV4cCI6MTcyNTUwMTIxNX0.XJIdcvG32KzycGRdWaXMupTl3yE39RO62PAZqVdN890",
+        "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmJkYWUzNTkxNjkyZTEwYmE1MDQyMjEiLCJpYXQiOjE3MjQ4OTY0MTUsImV4cCI6MTcyNTUwMTIxNX0.N9s0vaR-cSCupTzZ2nRRCm-Qj8-Uq-xISs4DRFg4Nmw"
+    }
+    
+}
+
+
+### update thread
+PATCH {{host}}/api/v1/thread/66d0130bbcfcb93f6795c804
+Content-Type: application/json
+
+{
+    "content": "edit my thread",
+    "tokens": {
+        "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmJkYWUzNTkxNjkyZTEwYmE1MDQyMjEiLCJpYXQiOjE3MjQ4OTY0MTUsImV4cCI6MTcyNTUwMTIxNX0.XJIdcvG32KzycGRdWaXMupTl3yE39RO62PAZqVdN890",
+        "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmJkYWUzNTkxNjkyZTEwYmE1MDQyMjEiLCJpYXQiOjE3MjQ4OTY0MTUsImV4cCI6MTcyNTUwMTIxNX0.N9s0vaR-cSCupTzZ2nRRCm-Qj8-Uq-xISs4DRFg4Nmw"
+    }
+}
+
+
+### delete thread
+DELETE {{host}}/api/v1/thread/66cfee41b254a1428ef53f12
+Content-Type:application/json
+
+{
+    "tokens": {
+        "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmJkYWUzNTkxNjkyZTEwYmE1MDQyMjEiLCJpYXQiOjE3MjQ4OTY0MTUsImV4cCI6MTcyNTUwMTIxNX0.XJIdcvG32KzycGRdWaXMupTl3yE39RO62PAZqVdN890",
+        "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NmJkYWUzNTkxNjkyZTEwYmE1MDQyMjEiLCJpYXQiOjE3MjQ4OTY0MTUsImV4cCI6MTcyNTUwMTIxNX0.N9s0vaR-cSCupTzZ2nRRCm-Qj8-Uq-xISs4DRFg4Nmw"
+    }
+}
