@@ -24,7 +24,7 @@ COPY package*.json ./
 
 RUN npm install --omit=dev
 
-EXPOSE 8010
+EXPOSE 8030
 
 # start
 CMD ["npm", "run", "start"]

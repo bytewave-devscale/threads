@@ -24,10 +24,22 @@ export async function handleCreateThread(req: Request, res: Response) {
   }
 }
 
-export async function handleGetOneThread(req: Request, res: Response) {
+export async function handleGetThreadById(req: Request, res: Response) {
   const threadId = req.params.threadId;
   try {
-    const thread = await threadService.getOneThread(threadId);
+    const thread = await threadService.getThreadById(threadId);
+    res.status(200).json({ thread });
+  } catch (error) {
+    if (error instanceof Error) {
+      res.status(400).json({ error: error.message });
+    }
+  }
+}
+
+export async function handleGetThreadByAuthor(req: Request, res: Response) {
+  const authorId = req.params.authorId;
+  try {
+    const thread = await threadService.getThreadByAuthor(authorId);
     res.status(200).json({ thread });
   } catch (error) {
     if (error instanceof Error) {

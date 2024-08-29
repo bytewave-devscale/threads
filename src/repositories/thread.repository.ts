@@ -7,28 +7,33 @@ const threadSchema = new Schema({
   content: String,
 });
 
-const Thread = model("Thread", threadSchema);
+const threadModel = model("Thread", threadSchema);
 
 export async function createThread(threadData: threadInterface) {
-  const newThread = await new Thread(threadData).save();
+  const newThread = await new threadModel(threadData).save();
   return newThread;
 }
 
-export async function getOneThread(threadId: string) {
-  const thread = await Thread.find({_id:threadId});
-  return thread;
-}
+// export async function getOneThread(threadId: string) {
+//   const thread = await threadModel.find({ _id: threadId });
+//   return thread;
+// }
 
-export async function getAllThread() {
-  const allThread = await Thread.find();
-  return allThread;
+// export async function getAllThread() {
+//   const allThread = await threadModel.find();
+//   return allThread;
+// }
+
+export async function getThreads(filter: { _id?: string; authorId?: string }) {
+  const threads = await threadModel.find(filter).exec();
+  return threads;
 }
 
 export async function updateThread(
   threadId: string,
   threadData: threadUpdateInterface
 ) {
-  const updatedThread = await Thread.findOneAndUpdate(
+  const updatedThread = await threadModel.findOneAndUpdate(
     { _id: threadId, authorId: threadData.authData.userId },
     threadData,
     {
@@ -38,7 +43,10 @@ export async function updateThread(
   return updatedThread;
 }
 
-export async function deleteThread(threadId: string, userId:string) {
-  const deletedThread = await Thread.findOneAndDelete({_id:threadId, authorId:userId})
+export async function deleteThread(threadId: string, userId: string) {
+  const deletedThread = await threadModel.findOneAndDelete({
+    _id: threadId,
+    authorId: userId,
+  });
   return deletedThread;
 }

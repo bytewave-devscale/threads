@@ -28,16 +28,23 @@ export async function createThread(data: threadCreateInterface) {
   return newThread;
 }
 
-export async function getOneThread(threadId: string) {
-  const thread = await threadRepository.getOneThread(threadId);
-  if (!thread) throw new Error("thread not found");
-
-  return thread;
+export async function getAllThread() {
+  const allThread = await threadRepository.getThreads({});
+  return allThread;
 }
 
-export async function getAllThread() {
-  const allThread = await threadRepository.getAllThread();
-  return allThread;
+export async function getThreadById(threadId: string) {
+  const threads = await threadRepository.getThreads({ _id: threadId });
+  if (threads.length === 0) throw new Error("thread not found");
+
+  return threads[0];
+}
+
+export async function getThreadByAuthor(authorId: string) {
+  const threads = await threadRepository.getThreads({ authorId });
+  if (threads.length === 0) throw new Error("thread not found");
+
+  return threads;
 }
 
 export async function updateThread(
